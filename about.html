@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Myself</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="styles/about.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+    <nav class="navbar sticky-top">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">Axolotl Enthusiast</a>
+            <button class="navbar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html" class="active">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="links.html">Links</a></li>
+                <li><a href="reference.html">References</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="section-timeline-heading">
+            <div class="container">
+                <div class="padding-vertical-xlarge">
+                    <div class="timeline-main_heading-wrapper">
+                        <div class="margin-bottom-medium">
+                            <div class="header_text">About Tony</div>
+                        </div>
+                        <div class="paragraph-large">
+                            Tony Wong<br>
+                            黃俊羲<br>
+                            Hardware engineer in IoT + Secondary major in AI<br>
+                            Love Axolotl
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="section-timeline">
+            <div class="container">
+                <div class="timeline_component">
+                    <div class="timeline_progress">
+                        <div class="timeline_progress-bar"></div>
+                    </div>
+                    <div class="timeline_item"><!--I am... (abilities)-->
+                        <div class="timeline_left m-2">
+                            <div class="timeline_date-text text-start">
+                                <div class="p-2">I am ...</div>
+                                <div id="carouselExample" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="assets/about/aboutHardware_1.webp" class="d-block w-100"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Hardware instrumental testing</h5>
+                                                <h4>Wave period, form, current from oscilloscope and multimeter</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/project/MicroControl_2new.webp" class="d-block w-100 "
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Hardware Microcontroller</h5>
+                                                <h4>STM32 microcontroller circuit</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutSoftware_1.webp"
+                                                class="d-flex justify-content-center" height="300vh" width="auto"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Microcontroller programming</h5>
+                                                <h4>STM32CubeIDE programming(used in robot car project)</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline_centre">
+                            <div class="timeline_circle"></div>
+                        </div>
+                        <div class="timeline_right m-2 ">
+                            <div class="margin-bottom-xlarge ">
+                                <div class="timeline_text justify-content-center">
+                                    <ul>
+                                        <li>hardware programming in C++/C<br>e.g. STM32, Arduino, ESP32</li>
+                                        <li>basic system anaylsis using Matlab <br>e.g. PID </li>
+                                        <li>prototyping skills in hardware<br>e.g. soldering, basic CAD, electronic
+                                            instrumental
+                                            testing</li>
+                                        <li>apply concepts of AI applications of IoT
+                                            <br>e.g. 02 Traffic Light Project, 05 IC Nvidia
+                                            Jetson Robot Contest
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline_image_wrapper">
+                                <img src="#" loading="lazy" alt="gif here" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline_item"><!--item 2: Education-->
+                        <div class="timeline_left m-2">
+                            <div class="timeline_date-text text-start">
+                                <div class="p-2">Education</div>
+                                <div id="carouselExample2" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="assets/about/aboutEducation_1.webp" class="d-block w-100"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Classmates </h5>
+                                                <h4>Me: "unaware of my surroundings"</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutHardware_2.webp" class="d-block w-100 h-150"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">IC PCB fabrication venue</h5>
+                                                <h4>Industrial Center(IC) PCB fabrication for prototyping</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample2" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample2" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline_centre">
+                            <div class="timeline_circle"></div>
+                        </div>
+                        <div class="timeline_right">
+                            <div class="margin-bottom-xlarge">
+                                <div class="timeline_text m-2">
+                                    <ul>
+                                        <li>Hardware Engineering: studying in Hong Kong Polytechnic University
+                                            <br>'BEng (HONS) INTERNET-OF-THINGS WITH A SECONDARY MAJOR IN AIDA'
+                                            <br>(Year 4)
+                                        </li>
+                                        <li>Japanese(Hobby): studying in HKU SPACE
+                                            <br>'Certificate in Japanese Upper Intermediate'
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline_image_wrapper">
+                                <img src="#" loading="lazy" alt="gif here" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline_item"><!--item 3: Work Experience/Community Service-->
+                        <div class="timeline_left m-2">
+                            <div class="timeline_date-text text-start">
+                                <div class="p-2">Work Experience/<br>Community Service</div>
+                                <div id="carouselExample3" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="assets/about/aboutSL_1.webp" class="d-block w-100" height="400vh"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Service Learning(SL)</h5>
+                                                <h4>Students designed robots</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutSL_2new.webp" class="d-block w-100 " alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">SL: finishing lecture </h5>
+                                                <h4>Photography of finishing day 3 lecture</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutSL_4.webp" class="d-flex justify-content-center"
+                                                height="300vh" width="auto" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">SL: STEM ppt prepared for day 2 teaching </h5>
+                                                <h4>STEM hardware concepts & 'microbit' programming</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutSL_5.webp" class="d-flex justify-content-center"
+                                                height="300vh" width="auto" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">SL: microbit programming </h5>
+                                                <h4>Programming Logic </h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/IC_BLEMesh1.webp"
+                                                class="d-flex justify-content-center" height="300vh" width="auto"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Work-integrated Education(WIE)</h5>
+                                                <h4>Preparation material ppt for WIE</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/IC_BLEMesh2.webp"
+                                                class="d-flex justify-content-center" height="300vh" width="auto"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">WIE: instruction material </h5>
+                                                <h4>Instructions for provisioning BLE mesh</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample3" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample3" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline_centre">
+                            <div class="timeline_circle"></div>
+                        </div>
+                        <div class="timeline_right">
+                            <div class="margin-bottom-xlarge">
+                                <div class="timeline_text m-2">
+                                    <ul>
+                                        <li>ESP32C3 BLE mesh network researcher<br>
+                                            -> Study protocol of mesh provisioning<br>
+                                            -> Prepare BLE mesh training materials for IC
+                                        </li>
+                                        <li>Secondary School STEM activity assistor<br>
+                                            -> teaching secondary student STEM concept<br>
+                                            -> build robot and hardware programming
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline_image_wrapper">
+                                <img src="#" loading="lazy" alt="gif here" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="timeline_item"><!--item 4: Hobbies+ language proficiencies-->
+                        <div class="timeline_left m-2">
+                            <div class="timeline_date-text text-start">
+                                <div class="p-2">Hobbies + <br> Language Proficiency</div>
+                                <div id="carouselExample4" class="carousel slide">
+                                    <div class="carousel-inner">
+                                        <div class="carousel-item active">
+                                            <img src="assets/about/aboutJapanese1.webp" class="d-block w-100" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Japanese: gathering with teacher </h5>
+                                                <h4>Gathering with HKU space Japanese teacher(for previous 2 years
+                                                    eduation)</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutJapanese3.webp" class="d-block w-100" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Japanese: photograph </h5>
+                                                <h4>Year 1 Photograph</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/aboutJapanese2.webp" class="d-block w-100 h-150"
+                                                alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Japanese: assignment</h5>
+                                                <h4>Assignment ppt for presentation</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/Trip_about.webp"
+                                                class="d-flex justify-content-center" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Trip </h5>
+                                                <h4>Family trip with my fathers' friend</h4>
+                                            </div>
+                                        </div>
+                                        <div class="carousel-item">
+                                            <img src="assets/about/TripScenariesAbout.webp"
+                                                class="d-flex justify-content-center" alt="...">
+                                            <div class="card-body">
+                                                <h5 class="card-title">Trip scenaries </h5>
+                                                <h4>Trip scenaries during visit in 金沢</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button class="carousel-control-prev" type="button"
+                                        data-bs-target="#carouselExample4" data-bs-slide="prev">
+                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Previous</span>
+                                    </button>
+                                    <button class="carousel-control-next" type="button"
+                                        data-bs-target="#carouselExample4" data-bs-slide="next">
+                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                        <span class="visually-hidden">Next</span>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="timeline_centre">
+                            <div class="timeline_circle"></div>
+                        </div>
+                        <div class="timeline_right">
+                            <div class="margin-bottom-xlarge">
+                                <div class="timeline_text m-2">
+                                    <ul>
+                                        <li>Japanese lesson once per week
+                                        </li>
+                                        <li>Playing guitar and reading manga
+                                        </li>
+                                        <li>Family trip
+                                        </li>
+                                        <li>Fluent in Cantonese, English, Mandarin</li>
+                                        <li> Not quite fluent in
+                                            Japanese(studying)
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="timeline_image_wrapper">
+                                <img src="#" loading="lazy" alt="gif here" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="overlay-fade-top"></div>
+                    <div class="overlay-fade-bottom"></div>
+                </div>
+            </div>
+            <div style="height: 50vh;"></div>
+        </div>
+    </div>
+    <footer>
+        <div class="fixed-bottom text-bg-dark text-center p-1">
+            <p> © Tony Wong - Web Portfolio ver1</p>
+        </div>
+    </footer>
+
+</body>
+<script src="logic/aboutLogic.js"></script>
+
+</html>

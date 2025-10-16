@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/links.css">
+</head>
+
+<body>
+    <nav class="navbar sticky-top">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">Axolotl Enthusiast</a>
+            <button class="navbar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html">Projects</a></li>
+                <li><a href="links.html" class="active">Links</a></li>
+                <li><a href="reference.html">References</a></li>
+            </ul>
+        </div>
+    </nav>
+    <svg width="0" height="0" style="display:none;">
+        <symbol id="icon-facebook" viewBox="0 0 24 24">
+            <path fill="currentColor" d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3V2z" />
+        </symbol>
+        <symbol id="icon-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
+        </symbol>
+        <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="currentColor">
+            <path
+                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z" />
+        </symbol>
+        <symbol id="icon-youtube" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12,2A10,10,0,1,0,22,12,10,10,0,0,0,12,2ZM10,16.5v-9L16,12Z" />
+        </symbol>
+        <symbol id="icon-verified" viewBox="0 0 16 16" fill="currentColor">
+            <path
+                d="M16 8c0 .33-.03.66-.08 1a6.3 6.3 0 0 1-1.4 3.54c-1.3 1.6-3.48 2.46-5.52 2.46-1.74 0-3.38-.6-4.66-1.72-.05.01-.1.01-.14.01-.1 0-.18-.01-.27-.04A6.47 6.47 0 0 1 0 8c0-3.58 2.9-6.5 6.47-6.5.9 0 1.76.19 2.53.52.42.18.86.42 1.3.72.45.3.88.66 1.27 1.06.4.4.75.83 1.06 1.28.3.44.54.88.71 1.32.33.77.53 1.63.53 2.52zM6.94 11.2L4.5 8.78l1.06-1.06 1.38 1.38 3.52-3.53L11.52 6.6z">
+            </path>
+        </symbol>
+    </svg>
+
+    <div class="stage" style="--t: .5">
+        <div class="bg" aria-hidden="true"></div>
+        <div class="dots" aria-hidden="true"></div>
+
+        <div class="card">
+            <!-- Light Mode Content -->
+            <div class="card-layer card-light">
+                <h2 class="card-title fs-3">Social Media and LinkedIn</h2>
+                <div class="social-links row row-cols-3">
+                    <button id="buttonFacebook" href="#" class="social-icon col">
+                        <svg style="color: #687cfa;">
+                            <use href="#icon-facebook" />
+                        </svg>
+                        <span class="tooltip" style="background-color: #687cfa;">Facebook</span>
+                    </button>
+                    <button id="buttonInstagram" href="#" class="social-icon col">
+                        <svg style="color: #c13584;">
+                            <use href="#icon-instagram" />
+                        </svg>
+                        <span class="tooltip" style="background-color: #c13584;">Instagram</span>
+                    </button>
+                    <button id="buttonLinkedin" href="#" class="social-icon col">
+                        <svg style="color: #0077b5;">
+                            <use href="#icon-linkedin" />
+                        </svg>
+                        <span class="tooltip" style="background-color: #0077b5;">LinkedIn</span>
+                    </button>
+                </div>
+                <div class="social-text-container">
+                    <div id="facebookLink" class="profile profile-large d-none">
+                        <img src="assets/link/linksOldHero.webp" alt="" class="profile-avatar ">
+                        <a href="https://www.facebook.com/chtonywong?locale=zh_HK " target="_blank"
+                            class="profile-name">Facebook
+                            (mostly family stuff)</a>
+                    </div>
+                    <div id="instagramLink" class="profile profile-large d-none">
+                        <img src="assets/imgHero.webp" alt="" class="profile-avatar ">
+                        <a href="https://www.instagram.com/tonywong578/" target="_blank" class="profile-name">Instagram
+                            (still updating)</a>
+                    </div>
+                    <div id="linkinLink" class="profile profile-large d-none">
+                        <img src="assets/imgHero.webp" alt="" class="profile-avatar ">
+                        <a href="https://www.linkedin.com/in/tony-wong-84607238b/" target="_blank"
+                            class="profile-name">LinkIn</a>
+                    </div>
+                </div>
+            </div>
+            <!-- Dark Mode Content -->
+            <div class="card-layer card-dark">
+                <h2 class="card-title fs-3">YouTube Links</h2>
+                <div class="video-list">
+                    <a href="https://youtu.be/bPBEeJme5Lg" target="_blank" class="video-preview">
+                        <div class="video-thumbnail">
+                            <img src="assets/link/AIproject_video.webp" alt="AI video project">
+                            <span class="video-time">2:00</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">AI video project 2024 sem1</h3>
+                        </div>
+                    </a>
+                    <a href="https://youtube.com/shorts/jUE4RXrK7C4?feature=share" target="_blank"
+                        class="video-preview">
+                        <div class="video-thumbnail">
+                            <img src="assets/link/DynamicJointLab.webp" alt="Generative Art Thumbnail">
+                            <span class="video-time">00:24</span>
+                        </div>
+                        <div class="video-info">
+                            <h3 class="video-title">2024 sem2 JointLab video</h3>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="divider" aria-hidden="true"></div>
+
+        <button class="handle" id="handle" aria-label="Drag to change content" title="Drag left/right">
+            <span class="arrows">⇠ ⇢</span>
+        </button>
+
+        <div class="caption">Drag the circle to switch views</div>
+    </div>
+
+
+    <div class="fixed-bottom text-bg-dark text-center p-1">
+        <p> © Tony Wong - Web Portfolio ver1</p>
+    </div>
+    <script>
+        (function () {
+            const stage = document.querySelector('.stage');
+            const handle = document.getElementById('handle');
+
+            let dragging = false;
+            let stageRect = null;
+
+            function clamp01(v) { return Math.max(0, Math.min(1, v)); }
+
+            function setFromClientX(clientX) {
+                const x = clamp01((clientX - stageRect.left) / stageRect.width);
+                stage.style.setProperty('--t', x.toFixed(4));
+            }
+
+            function onPointerDown(e) {
+                dragging = true;
+                stageRect = stage.getBoundingClientRect();
+                handle.setPointerCapture?.(e.pointerId);
+                setFromClientX(e.clientX);
+            }
+            function onPointerMove(e) {
+                if (!dragging) return;
+                setFromClientX(e.clientX);
+            }
+            function onPointerUp(e) {
+                if (!dragging) return;
+                dragging = false;
+                handle.releasePointerCapture?.(e.pointerId);
+                const t = parseFloat(getComputedStyle(stage).getPropertyValue('--t'));
+                const snap = t < 0.5 ? 0 : 1;
+                animateTo(snap, 140);
+            }
+
+            function onKey(e) {
+                const step = e.shiftKey ? 0.1 : 0.04;
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowRight') {
+                    e.preventDefault();
+                    const t = parseFloat(getComputedStyle(stage).getPropertyValue('--t'));
+                    const next = clamp01(t + (e.key === 'ArrowRight' ? step : -step));
+                    stage.style.setProperty('--t', next.toFixed(4));
+                }
+            }
+
+            function animateTo(target, ms) {
+                const start = performance.now();
+                const t0 = parseFloat(getComputedStyle(stage).getPropertyValue('--t'));
+                const delta = target - t0;
+                function frame(now) {
+                    const p = Math.min(1, (now - start) / ms);
+                    const e = 1 - Math.pow(1 - p, 3); // easeOutCubic
+                    stage.style.setProperty('--t', (t0 + delta * e).toFixed(4));
+                    if (p < 1) requestAnimationFrame(frame);
+                }
+                requestAnimationFrame(frame);
+            }
+
+            const navbarToggle = document.querySelector(".navbar-toggle");
+            const navbarMenu = document.querySelector(".navbar-menu");
+            const full_nav = document.querySelector(".Full_nav");
+
+            navbarToggle.addEventListener("click", () => {
+                navbarToggle.classList.toggle("active");
+                navbarMenu.classList.toggle("active");
+            });
+
+
+            handle.addEventListener('pointerdown', onPointerDown);
+            window.addEventListener('pointermove', onPointerMove);
+            window.addEventListener('pointerup', onPointerUp);
+            window.addEventListener('pointercancel', onPointerUp);
+            handle.addEventListener('keydown', onKey);
+            window.addEventListener('resize', () => { if (stage) stageRect = stage.getBoundingClientRect(); });
+
+            stage.style.setProperty('--t', 0.5);
+            handle.tabIndex = 0;
+            $(document).ready(function () {
+                $("#buttonFacebook").on("click", function () {
+                    $("#facebookLink").removeClass("d-none");
+                    $("#instagramLink").addClass("d-none");
+                    $("#linkinLink").addClass("d-none");
+                });
+                $("#buttonInstagram").on("click", function () {
+                    $("#facebookLink").addClass("d-none");
+                    $("#instagramLink").removeClass("d-none");
+                    $("#linkinLink").addClass("d-none");
+                });
+                $("#buttonLinkedin").on("click", function () {
+                    $("#facebookLink").addClass("d-none");
+                    $("#instagramLink").addClass("d-none");
+                    $("#linkinLink").removeClass("d-none");
+                });
+            });
+        })(
+        );
+    </script>
+</body>
+
+</html>

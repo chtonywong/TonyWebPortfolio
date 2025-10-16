@@ -1,0 +1,501 @@
+/*color changing bar*/
+:root {
+  /* Colors for the two states (light ↔ dark) */
+  --bg-left: #ffd481;
+  --bg-right: #ea5355;
+
+  /* Accent for the handle and divider */
+  --accent: #4aa3ff;
+  --accent-weak: color-mix(in oklab, var(--accent) 30%, transparent);
+
+  /* For the inner demo card */
+  --card-radius: 24px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  line-height: 1.6;
+  background: #2c4059;
+  color: #fff;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
+    Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+/* Stage: area where the effect lives */
+.stage {
+  position: relative;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: clamp(12px, 3vw, 24px);
+}
+
+/* The gradient background that morphs based on slider position */
+.bg {
+  position: absolute;
+  inset: 0;
+  transition: background 120ms linear;
+  background: linear-gradient(
+    90deg,
+    color-mix(
+        in oklab,
+        var(--bg-left) calc((1 - var(--t)) * 100%),
+        var(--bg-right) calc(var(--t) * 100%)
+      )
+      0%,
+    color-mix(
+        in oklab,
+        var(--bg-left) calc((1 - var(--t)) * 100%),
+        var(--bg-right) calc(var(--t) * 100%)
+      )
+      100%
+  );
+}
+
+/* Optional vertical divider that follows the handle */
+.divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--accent);
+  left: calc(var(--t) * 100%);
+  transform: translateX(-1px);
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* The main demo card */
+.card {
+  position: relative;
+  width: min(720px, 92vw);
+  height: min(520px, 80vh);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 2px 10px rgba(0, 0, 0, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Two layers for light and dark UIs, clipped by the divider */
+.card-layer {
+  position: absolute;
+  inset: 0;
+  padding: clamp(20px, 4vw, 32px);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(16px, 3vw, 24px);
+  overflow-y: auto;
+}
+
+.card-light {
+  background: radial-gradient(
+    1200px 600px at -5% -10%,
+    #ffffff 0%,
+    #f3f5f8 55%,
+    #e6e9ee 100%
+  );
+  color: #0f1720;
+  clip-path: polygon(
+    0 0,
+    calc(var(--t) * 100%) 0,
+    calc(var(--t) * 100%) 100%,
+    0 100%
+  );
+}
+.card-dark {
+  background: radial-gradient(
+    1000px 700px at 120% -10%,
+    #1a2432 0%,
+    #0e1420 60%,
+    #0a0f17 100%
+  );
+  color: #e9eef5;
+  clip-path: polygon(
+    calc(var(--t) * 100%) 0,
+    100% 0,
+    100% 100%,
+    calc(var(--t) * 100%) 100%
+  );
+}
+
+/* General Title for each card */
+.card-title {
+  font-size: clamp(18px, 3vw, 22px);
+  font-weight: 700;
+  text-align: center;
+}
+
+/* --- Light Card: Social Icons --- */
+.social-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  margin: 20px;
+  /*flex-grow: 1;*/
+  height: 100px;
+}
+.social-icon {
+  position: relative;
+  display: grid; /*grid*/
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+  border: transparent;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.social-text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  height: auto;
+}
+.social-icon:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+.social-icon svg {
+  width: 32px;
+  height: 32px;
+}
+.avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+.social-icon:hover .tooltip {
+  opacity: 1;
+  transform: translate(-50%, -120%);
+}
+.tooltip {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background: #ff3b30;
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 8px;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+/* Tooltip arrow */
+.tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: #ff3b30;
+}
+
+/* --- Dark Card: YouTube Links --- */
+.video-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.video-preview {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+  text-decoration: none;
+  color: inherit;
+  border-radius: 8px;
+  transition: background-color 0.2s ease;
+}
+.video-preview:hover {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.video-thumbnail {
+  position: relative;
+  flex-shrink: 0;
+}
+.video-thumbnail img {
+  width: 160px;
+  height: 90px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.video-time {
+  position: absolute;
+  bottom: 6px;
+  right: 6px;
+  background-color: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: 600;
+}
+.video-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.video-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  line-height: 1.3;
+}
+.video-channel,
+.video-meta {
+  font-size: 14px;
+  color: #a0a7b3;
+  margin: 0;
+}
+.video-channel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.verified-icon {
+  width: 14px;
+  height: 14px;
+  fill: #a0a7b3;
+}
+
+/* --- Draggable Handle & other UI --- */
+.handle {
+  position: absolute;
+  top: 50%;
+  left: calc(var(--t) * 100%);
+  transform: translate(-50%, -50%);
+  width: clamp(48px, 8.5vw, 62px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(
+    100% 100% at 30% 30%,
+    #79b8ff 0%,
+    #4aa3ff 60%,
+    #2982e6 100%
+  );
+  box-shadow: 0 6px 20px rgba(41, 130, 230, 0.45), 0 2px 8px rgba(0, 0, 0, 0.25),
+    inset 0 0 0 6px var(--accent-weak);
+  display: grid;
+  place-items: center;
+  color: #fff;
+  font-weight: 800;
+  cursor: grab;
+  touch-action: none;
+  user-select: none;
+  z-index: 3;
+}
+.handle:active {
+  cursor: grabbing;
+}
+.arrows {
+  font-size: clamp(14px, 2.6vw, 18px);
+}
+.handle:focus-visible {
+  outline: 3px solid #fff;
+  outline-offset: 4px;
+}
+.dots {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(
+    1px 1px at 1px 1px,
+    rgba(255, 255, 255, 0.08) 1px,
+    transparent 0
+  );
+  background-size: 14px 14px;
+  pointer-events: none;
+}
+.caption {
+  position: absolute;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+  opacity: 0.7;
+  text-align: center;
+  padding: 6px 10px;
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  backdrop-filter: blur(6px);
+}
+
+@media (max-width: 600px) {
+  .video-preview {
+    flex-direction: column;
+  }
+  .video-thumbnail img {
+    width: 100%;
+    height: auto;
+  }
+}
+/*navbar*/
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80px;
+  width: 100%;
+  top: 0px;
+  position: sticky;
+  background-color: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+  z-index: 999;
+}
+.navbar-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 2rem;
+  max-width: 1600px;
+}
+.navbar-logo {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+.navbar-container .navbar-menu {
+  display: flex;
+  text-align: center;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.navbar-container .navbar-menu li a {
+  text-decoration: none;
+  color: white;
+  font-size: 1.3rem;
+  font-weight: 500;
+  padding: 3px 20px;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  transition: all 0.7s ease;
+  white-space: nowrap;
+}
+.navbar-container .navbar-menu li a:hover,
+.navbar-container .navbar-menu li a.active {
+  color: #162530;
+  background: rgba(188, 212, 229, 0.8);
+  border: 2px solid white;
+}
+.navbar-toggle {
+  display: none;
+  background: transparent;
+  padding: 10px;
+  border: none;
+  cursor: pointer;
+}
+.bar {
+  display: block;
+  width: 25px;
+  height: 3px;
+  margin: 5px auto;
+  background: white;
+  transition: all 0.3s ease-in-out;
+}
+/*responsive style for nav 880 px*/
+@media (max-width: 880px) {
+  .navbar {
+    backdrop-filter: none;
+  }
+  .navbar-container .navbar-menu {
+    display: none;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.7rem !important;
+    position: absolute;
+    height: 100vh;
+    width: 250px;
+    top: 0;
+    right: 0;
+    padding: 5rem 1.5rem;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+  }
+  .navbar-container .navbar-menu.active {
+    display: flex;
+  }
+  .navbar-toggle {
+    display: block;
+    z-index: 999;
+  }
+  .navbar-toggle.active .bar:nth-child(2) {
+    opacity: 0;
+  }
+  .navbar-toggle.active .bar:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+  }
+  .navbar-toggle.active .bar:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+}
+@media (max-width: 480px) {
+  .navbar-container {
+    padding: 0 1rem;
+  }
+  .navbar-logo {
+    font-size: 1.7rem;
+  }
+  .navbar-container .navbar-menu li a {
+    font-size: 1.2rem;
+    padding: 3px 15px;
+  }
+}
+/*profile + links*/
+.profile {
+  display: flex;
+  width: 12vw;
+  height: auto;
+  align-items: center;
+  gap: 0.75rem; /* 12px if base font-size is 16px */
+
+  /* Optional: Add some padding and a border for visual clarity */
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 20px;
+  border: 1px solid #ddd;
+  margin-bottom: 1.5rem;
+  width: fit-content; /* Make the container only as wide as its content */
+  /*glassmorphism*/
+  background-color: transparent;
+  backdrop-filter: blur(10px); /*for glassmorphism*/
+  background-image: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0.3),
+    rgba(0, 0, 0, 0.2)
+  );
+  background-size: 30px;
+}
+.profile-large {
+  gap: 1rem; /* Increase space for the larger version */
+}
+
+.profile-large .profile-avatar {
+  width: 150px;
+  height: 130px;
+  border-radius: 50%;
+  color: #007bff;
+}
+
+.profile-large .profile-name {
+  font-size: 1.5rem; /* 24px */
+}

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles/projects.css">
+    <style>
+        .image.zooming-out {
+            position: fixed;
+            z-index: 10000;
+            transition: all 0.5s ease-in-out;
+            /* Will be set by JS */
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-radius: 0 !important;
+            object-fit: cover;
+        }
+
+        body.is-transitioning {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+
+</head>
+
+
+<body>
+    <nav class="navbar sticky-top">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">Axolotl Enthusiast</a>
+            <button class="navbar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="links.html">Links</a></li>
+                <li><a href="reference.html">References</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="container"><!--border image radius not collide with image radius-->
+        <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+            <div id="project1" class="card-body">
+                <div class="card-title fs-1"> Project 01</div>
+                <p class="card-text">Microcontrollers project</p>
+                <button onclick="onclickButton(1)" id="zoomIn1" class="btn btn-primary">Go
+                </button>
+            </div>
+            <img id="projectPic1" class="image" src="assets/project/ProjectMicrocontroller.webp" draggable="false" />
+            <div id="project2" class="card-body">
+                <div class="card-title fs-1"> Project 02</div>
+                <p class="card-text">Machine learning enabled Traffic Light Project</p>
+                <button onclick="onclickButton(2)" id="zoomIn2" class="btn btn-primary">Go </button>
+            </div>
+            <img id="projectPic2" class="image" src="assets/project/ProjectTraffic.webp" draggable="false" />
+            <div id="project3" class="card-body">
+                <div class="card-title fs-1"> Project 03</div>
+                <p class="card-text">Robot Car and PID</p>
+                <button onclick="onclickButton(3)" id="zoomIn3" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic3" class="image" src="assets/project/ProjectsPID.webp" draggable="false" />
+            <div id="project4" class="card-body">
+                <div class="card-title fs-1"> Project 04</div>
+                <p class="card-text">Pacman AI</p>
+                <button onclick="onclickButton(4)" id="zoomIn4" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic4" class="image" src="assets/project/ProjectPacMan.webp" draggable="false" />
+            <div id="project5" class="card-body">
+                <div class="card-title fs-1"> Project 05</div>
+                <p class="card-text">Robot contest with AI vision(ongoing)</p>
+                <button onclick="onclickButton(5)" id="zoomIn5" class="btn btn-primary">Go </button>
+            </div>
+            <img id="projectPic5" class="image" src="assets/project/ICNviCAD_1.webp" draggable="false" />
+        </div>
+    </div>
+    <div class="fixed-bottom text-bg-dark text-center p-1">
+        <p> © Tony Wong - Web Portfolio ver1</p>
+    </div>
+    <script src="logic/projects.js"></script>
+</body>
+
+</html>

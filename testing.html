@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/projects.css">
+    <!-- Style for the transition effect -->
+    <style>
+        .image.zooming-out {
+            position: fixed;
+            z-index: 10000;
+            transition: all 0.5s ease-in-out;
+            /* Will be set by JS */
+            top: 0;
+            left: 0;
+            width: 0;
+            height: 0;
+            border-radius: 0 !important;
+            object-fit: cover;
+        }
+
+        body.is-transitioning {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar (unchanged) -->
+    <nav class="navbar sticky-top">
+        <div class="navbar-container">
+            <a href="index.html" class="navbar-logo">Axolotl Enthusiast</a>
+            <button class="navbar-toggle">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+            <ul class="navbar-menu">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="projects.html" class="active">Projects</a></li>
+                <li><a href="links.html">Links</a></li>
+                <li><a href="reference.html">References</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div id="image-track" data-mouse-down-at="0" data-prev-percentage="0">
+            <!-- Project 1 -->
+            <div id="project1" class="card-body">
+                <div class="card-title fs-1"> Project 01</div>
+                <p class="card-text">Microcontrollers project</p>
+                <button onclick="onclickButton(1)" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic1" class="image" src="/assets/AboutMyself_index.jpg" draggable="false" />
+
+            <!-- Project 2 -->
+            <div id="project2" class="card-body">
+                <div class="card-title fs-1"> Project 02</div>
+                <p class="card-text">Machine learning enabled Traffic Light Project</p>
+                <button onclick="onclickButton(2)" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic2" class="image" src="/assets/Project_index.png" draggable="false" />
+
+            <!-- Project 3 -->
+            <div id="project3" class="card-body">
+                <div class="card-title fs-1"> Project 03</div>
+                <p class="card-text">Robot Car and PID</p>
+                <button onclick="onclickButton(3)" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic3" class="image" src="/assets/Links_index.jpg" draggable="false" />
+
+            <!-- Project 4 -->
+            <div id="project4" class="card-body">
+                <div class="card-title fs-1"> Project 04</div>
+                <p class="card-text">Pacman AI</p>
+                <button onclick="onclickButton(4)" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic4" class="image" src="/assets/Links_index.jpg" draggable="false" />
+
+            <!-- Project 5 -->
+            <div id="project5" class="card-body">
+                <div class="card-title fs-1"> Project 05</div>
+                <p class="card-text">Robot contest with AI vision(ongoing)</p>
+                <button onclick="onclickButton(5)" class="btn btn-primary">Go</button>
+            </div>
+            <img id="projectPic5" class="image" src="/assets/Links_index.jpg" draggable="false" />
+        </div>
+    </div>
+
+    <div class="fixed-bottom text-bg-dark text-center p-1">
+        <p> © Tony Wong - Web Portfolio ver1</p>
+    </div>
+
+    <!-- ======================= -->
+    <!--  MODIFIED JAVASCRIPT    -->
+    <!-- ======================= -->
+    <script>
+        const track = document.getElementById("image-track");
+
+        // --- Slider Logic (unchanged) ---
+        const handleOnDown = (e) => (track.dataset.mouseDownAt = e.clientX);
+
+        const handleOnUp = () => {
+            track.dataset.mouseDownAt = "0";
+            // IMPORTANT: Save the slider position when the user lets go
+            track.dataset.prevPercentage = track.dataset.percentage;
+            localStorage.setItem("sliderPercentage", track.dataset.percentage);
+        };
+
+        const handleOnMove = (e) => {
+            if (track.dataset.mouseDownAt === "0") return;
+
+            const mouseDelta = parseFloat(track.dataset.mouseDownAt) - e.clientX,
+                maxDelta = window.innerWidth / 2;
+
+            const percentage = (mouseDelta / maxDelta) * -100,
+                nextPercentageUnconstrained = parseFloat(track.dataset.prevPercentage) + percentage,
+                nextPercentage = Math.max(Math.min(nextPercentageUnconstrained, 0), -100);
+
+            track.dataset.percentage = nextPercentage;
+
+            applySliderPosition(nextPercentage);
+        };
+
+        // Extracted this into a function for reusability
+        function applySliderPosition(percentage, duration = 1200) {
+            track.animate(
+                { transform: `translate(${percentage}%, -50%)` },
+                { duration, fill: "forwards" }
+            );
+
+            for (const image of track.getElementsByClassName("image")) {
+                image.animate(
+                    { objectPosition: `${100 + parseFloat(percentage)}% center` },
+                    { duration, fill: "forwards" }
+                );
+            }
+        }
+
+        // --- Event Listeners ---
+        window.onmousedown = (e) => handleOnDown(e);
+        window.ontouchstart = (e) => handleOnDown(e.touches[0]);
+        window.onmouseup = (e) => handleOnUp(e);
+        window.ontouchend = (e) => handleOnUp(e.touches[0]);
+        window.onmousemove = (e) => handleOnMove(e);
+        window.ontouchmove = (e) => handleOnMove(e.touches[0]);
+
+        // --- NEW: State Restoration and Page Transitions ---
+
+        // 1. Restore slider position on page load
+        document.addEventListener("DOMContentLoaded", () => {
+            const savedPercentage = localStorage.getItem("sliderPercentage");
+
+            // Check if we are coming back from the project page
+            const urlParams = new URLSearchParams(window.location.search);
+            const fromProject = urlParams.get('fromProject');
+            const projectNum = localStorage.getItem('projectNumLocal');
+
+            if (savedPercentage) {
+                track.dataset.percentage = savedPercentage;
+                track.dataset.prevPercentage = savedPercentage;
+
+                // If we are returning, do a fast animation. Otherwise, just snap to position.
+                const duration = fromProject ? 600 : 0;
+                applySliderPosition(savedPercentage, duration);
+            }
+
+            // 2. Handle the "zoom-in" animation on return
+            if (fromProject && projectNum) {
+                const returningImage = document.getElementById(`projectPic${projectNum}`);
+                if (returningImage) {
+                    // Start the image as fixed and full-screen
+                    returningImage.style.position = 'fixed';
+                    returningImage.style.zIndex = '10000';
+                    returningImage.style.top = '0';
+                    returningImage.style.left = '0';
+                    returningImage.style.width = '100vw';
+                    returningImage.style.height = '100vh';
+                    returningImage.style.borderRadius = '0';
+                    returningImage.style.objectFit = 'cover';
+
+                    // After a short delay to allow rendering, start the animation back to its original spot
+                    setTimeout(() => {
+                        returningImage.style.transition = 'all 0.6s ease-in-out';
+                        // Reset styles so it returns to its CSS-defined state
+                        returningImage.style.position = '';
+                        returningImage.style.zIndex = '';
+                        returningImage.style.top = '';
+                        returningImage.style.left = '';
+                        returningImage.style.width = '';
+                        returningImage.style.height = '';
+                        returningImage.style.borderRadius = '';
+                        returningImage.style.objectFit = '';
+                    }, 50); // Small delay
+
+                    // Clean up the URL
+                    history.replaceState(null, '', window.location.pathname);
+                }
+            }
+        });
+
+
+        // 3. Handle the "zoom-out" navigation
+        function onclickButton(projectNum) {
+            // Save project number and current slider position
+            localStorage.setItem("projectNumLocal", projectNum);
+            localStorage.setItem("sliderPercentage", track.dataset.percentage || "0");
+
+            const imageToZoom = document.getElementById(`projectPic${projectNum}`);
+            if (!imageToZoom) {
+                // Fallback if image not found
+                window.location.href = "pContainer.html";
+                return;
+            }
+
+            // Get image position
+            const rect = imageToZoom.getBoundingClientRect();
+
+            // Apply the initial state for the animation
+            imageToZoom.classList.add("zooming-out");
+            imageToZoom.style.top = `${rect.top}px`;
+            imageToZoom.style.left = `${rect.left}px`;
+            imageToZoom.style.width = `${rect.width}px`;
+            imageToZoom.style.height = `${rect.height}px`;
+
+            // Animate the body fading out
+            document.body.classList.add('is-transitioning');
+
+            // Trigger the zoom animation
+            setTimeout(() => {
+                imageToZoom.style.top = '0';
+                imageToZoom.style.left = '0';
+                imageToZoom.style.width = '100vw';
+                imageToZoom.style.height = '100vh';
+            }, 10); // Short delay to ensure transition applies
+
+            // Navigate after the animation has had time to play
+            setTimeout(() => {
+                window.location.href = "pContainer.html";
+            }, 500); // 500ms delay
+        }
+    </script>
+</body>
+
+</html>
