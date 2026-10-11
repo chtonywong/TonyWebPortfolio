@@ -57,8 +57,10 @@
         </symbol>
     </svg>
 
-    <div class="stage" style="--t: .5">
-        <div class="bg" aria-hidden="true"></div>
+    <div class="stage" style="--t: 0">
+        <div class="bg" aria-hidden="true"> 
+            <div class="card-title fs-3">Swipe right or left</div> 
+        </div>
         <div class="dots" aria-hidden="true"></div>
 
         <div class="card">
@@ -224,7 +226,7 @@
             handle.addEventListener('keydown', onKey);
             window.addEventListener('resize', () => { if (stage) stageRect = stage.getBoundingClientRect(); });
 
-            stage.style.setProperty('--t', 0.5);
+            stage.style.setProperty('--t', 0);
             handle.tabIndex = 0;
             $(document).ready(function () {
                 $("#buttonFacebook").on("click", function () {
