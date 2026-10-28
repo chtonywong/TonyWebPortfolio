@@ -113,15 +113,16 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // 3. Handle the "zoom-out" navigation
-function onclickButton(projectNum) {
-  // Save project number and current slider position
+function navigateToProject(event, projectNum) {
+  event.preventDefault(); // Prevent immediate jump so animation can run
+
+  // Save project number and current slider position[cite: 2]
   localStorage.setItem("projectNumLocal", projectNum);
   localStorage.setItem("sliderPercentage", track.dataset.percentage || "0");
 
   const imageToZoom = document.getElementById(`projectPic${projectNum}`);
   if (!imageToZoom) {
-    // Fallback if image not found
-    window.location.href = "pContainer.html";
+    window.location.href = `pContainer.html?project=${projectNum}`;
     return;
   }
 
@@ -144,10 +145,10 @@ function onclickButton(projectNum) {
     imageToZoom.style.left = "0";
     imageToZoom.style.width = "100vw";
     imageToZoom.style.height = "100vh";
-  }, 10); // Short delay to ensure transition applies
+  }, 10);
 
-  // Navigate after the animation has had time to play
+  // Navigate after the animation finishes
   setTimeout(() => {
-    window.location.href = "pContainer.html";
-  }, 300); // 500ms delay
+    window.location.href = `pContainer.html?project=${projectNum}`;
+  }, 300);
 }
