@@ -4,19 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projects</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI"
-        crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="styles/pContainer.css">
+    <title>Project Details - Portfolio</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style>
         body {
             opacity: 0;
             animation: fadeIn 0.3s linear forwards;
-            /*animation-delay: 0.2s;
-            Delay fade in to sync with zoom */
         }
 
         @keyframes fadeIn {
@@ -24,184 +18,566 @@
                 opacity: 1;
             }
         }
+
+        /* Custom scrollbar styling for description panel */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #3b82f6;
+            border-radius: 8px;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #2563eb;
+        }
     </style>
 </head>
 
-<body>
-    <a href="projects.html?fromProject=true" class="btn btn-primary sticky-top">Go Back</a>
-    <div id="sliderSize" class="slider" reverse="true" style="
-            --width: 400px;
-            --height: 400px;
-            --quantity: 5;
-        ">
-        <div id="imageList" class="list">
-            <div class="item" style="--position: 1"><img src="assets/project/projectsICrobot_1.webp" alt=""></div>
-            <div class="item" style="--position: 2"><img src="assets/project/ICNviCAD_1.webp" alt=""></div>
-            <div class="item" style="--position: 3"><img src="assets/project/projectsICrobot_2.webp" alt=""></div>
-            <div class="item" style="--position: 4"><img src="assets/project/projectsICrobot_3.webp" alt=""></div>
-            <div class="item" style="--position: 5"><img src="assets/project/projectsICrobot_5.webp" alt=""></div>
+<body
+    class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-blue-500 selection:text-white">
+
+    <!-- Top Navigation / Back Button -->
+    <header
+        class="w-full px-6 py-4 bg-slate-900/90 backdrop-blur sticky top-0 z-50 border-b border-slate-800 flex justify-between items-center">
+        <a href="projects.html?fromProject=true"
+            class="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white text-sm font-semibold rounded-xl transition-all duration-200 shadow-lg shadow-blue-500/20 active:scale-95">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                    d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+            </svg>
+            Back
+        </a>
+        <span id="projectBadge"
+            class="text-xs font-bold uppercase tracking-wider px-3.5 py-1.5 bg-slate-800 text-blue-400 rounded-full border border-slate-700/80 shadow-inner">
+            Project View
+        </span>
+    </header>
+
+    <!-- Mobile Toggle Buttons (Visible only on small screens)[cite: 5] -->
+    <div class="flex md:hidden w-full bg-slate-800 border-b border-slate-700 sticky top-[73px] z-40">
+        <button id="btnPictures" onclick="switchMobileTab('pictures')"
+            class="flex-1 py-3 text-center text-sm font-semibold text-blue-400 border-b-2 border-blue-500 transition-colors">
+            Pictures
+        </button>
+        <button id="btnDescription" onclick="switchMobileTab('description')"
+            class="flex-1 py-3 text-center text-sm font-semibold text-slate-400 border-b-2 border-transparent transition-colors">
+            Description
+        </button>
+    </div>
+
+    <!-- Main Container (Full screen width expansion for Desktop View)[cite: 4, 6] -->
+    <main class="flex-grow w-full px-4 sm:px-8 py-6 grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+
+        <!-- Left Column: Manual Image Carousel & Dynamic Picture Caption[cite: 4, 5] -->
+        <div id="picturesSection" class="w-full flex flex-col items-center justify-center space-y-4">
+            <div
+                class="relative w-full max-w-2xl aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl bg-slate-950/90 border border-slate-700/60 group flex items-center justify-center">
+                <!-- Updated: object-contain allows images of any dimension/aspect ratio to fit fully without cropping -->
+                <img id="carouselImage" src="" alt="Project Image"
+                    class="w-full h-full object-contain p-2 transition-all duration-300">
+
+                <!-- Left Navigation Arrow -->
+                <button onclick="prevImage()"
+                    class="absolute left-3 top-1/2 -translate-y-1/2 p-3 bg-slate-900/80 hover:bg-blue-600 text-white rounded-full backdrop-blur-md border border-slate-700 transition-all duration-200 active:scale-90 shadow-xl"
+                    aria-label="Previous Image">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7" />
+                    </svg>
+                </button>
+
+                <!-- Right Navigation Arrow -->
+                <button onclick="nextImage()"
+                    class="absolute right-3 top-1/2 -translate-y-1/2 p-3 bg-slate-900/80 hover:bg-blue-600 text-white rounded-full backdrop-blur-md border border-slate-700 transition-all duration-200 active:scale-90 shadow-xl"
+                    aria-label="Next Image">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7" />
+                    </svg>
+                </button>
+
+                <!-- Image Counter Indicator -->
+                <div
+                    class="absolute bottom-4 right-4 px-3 py-1 bg-slate-900/90 backdrop-blur-md border border-slate-700/80 rounded-full text-xs font-semibold text-slate-200 shadow-md">
+                    <span id="currentImageIndex">1</span> / <span id="totalImagesCount">5</span>
+                </div>
+            </div>
+
+            <!-- NEW: Picture Description / Caption Box -->
+            <div
+                class="w-full max-w-2xl bg-slate-800/60 p-4 rounded-xl border border-slate-700/60 shadow-lg backdrop-blur">
+                <div class="flex items-start gap-2.5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-blue-400 flex-shrink-0 mt-0.5"
+                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <div>
+                        <h4 class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1">Image Description
+                        </h4>
+                        <p id="imageDescription" class="text-sm text-slate-200 leading-relaxed">Loading description...
+                        </p>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="card1">
-        <div id="cardContent" class="card-content">
-            <!--<h2>04 AI contest</h2>
-            <h1>Framework: Python<br> Tools: VScode</h1>
-            <p>Description: training an AI-driven Pacman to play a game<br>
-                (self-learning contest to present something
-                related to AI)</p>
-            <p>-Python: learning reinforcment concepts/related projects online<br>
-                (Main reference for codes:Berkley, University of California, CS188 Subject<br>
-                https://inst.eecs.berkeley.edu/~cs188/fa24/projects/)
-                -PID: apply concepts and Matlab calculations into MCU programming<br>
-                (e.g. reading robot car wheel cycles per second-> quantify data for PID calulation)
-            </p>-->
+
+        <!-- Right Column: Scrollable Content / Context[cite: 4, 5] -->
+        <div id="descriptionSection"
+            class="w-full space-y-6 max-h-[calc(100vh-160px)] overflow-y-auto pr-3 custom-scrollbar">
+            <div id="cardContent"
+                class="space-y-6 bg-slate-800/40 p-6 md:p-8 rounded-2xl border border-slate-700/60 shadow-xl backdrop-blur">
+                <!-- Dynamic content gets injected here -->
+            </div>
         </div>
-    </div>
-    <div style="height:20vh;"></div>
-    <div class="fixed-bottom text-bg-dark text-center p-1">
-        <p> © Tony Wong - Web Portfolio Ver1</p>
-    </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full py-4 bg-slate-950 text-slate-400 text-center text-sm border-t border-slate-800">
+        <p>© Tony Wong - Web Portfolio Ver1</p>
+    </footer>
+
+    <!-- Script to handle manual image slider, dynamic picture captions, and PDF resource downloads -->
     <script>
-        var projectNum = localStorage.getItem("projectNumLocal");
-        var sliderSize = document.getElementById("sliderSize");
-        var image = document.getElementById("imageList");
+        // Project Image & Caption Data Arrays
+        const projectData = {
+            1: {
+                images: [
+                    "assets/project/ProjectMicrocontroller.webp",
+                    "assets/project/MicroControl_2new.webp",
+                    "assets/about/aboutHardware_3.webp",
+                    "assets/about/aboutHardware_1.webp",
+                    "assets/about/aboutHardware_2.webp"
+                ],
+                captions: [
+                    "Arduino Uno MCU traffic light simulation setup.",
+                    "ARM STM32F103RB MCU traffic light simulation setup.",
+                    "Lecture: Learning basic circuit board wiring and structure.",
+                    "Lecture: Oscilloscope measurement for timer polling & hardware interrupts.",
+                    "Lecture: learning how PCB are made into microcontrollers."
+                ]
+            },
+            2: {
+                images: [
+                    "assets/project/projectsTrafficOfficer1.webp",
+                    "assets/project/ProjectTraffic.webp",
+                    "assets/project/projectsTrafficOfficer2.webp",
+                    "assets/project/projectsTrafficOfficer3.webp",
+                    "assets/project/projectsTrafficOfficer5.webp"
+                ],
+                captions: [
+                    "Project idea: traffic officer in disguise.",
+                    "AI model detection of 4 different parking situations and its corresponding hardware outputs.",
+                    "Blynk IoT dashboard development process.",
+                    "Blynk dashboard outputs(switch) with hardware LED outputs.",
+                    "Arduino IDE coding: hardware connection through sending and receiving data from Blynk."
+                ]
+            },
+            3: {
+                images: [
+                    "assets/project/RobotCar_2.webp",
+                    "assets/project/projectRobotCar_3.webp",
+                    "assets/project/ProjectsPID.webp",
+                    "assets/project/DynamicSys_2.webp",
+                    "assets/project/DynamicSys_1.webp"
+                ],
+                captions: [
+                    "Task 1: Robot car line tracking race.",
+                    "Task 1 race track requirement.",
+                    "Joint Task: Robot car running on friction varying mat(brown area: friction varying area).",
+                    "Joint Task: MATLAB analysis graph tuning PID controller straight-line gains.",
+                    "Joint Task: MATLAB analysis transformation to discrete digital format that can be applied in hardware coding."
+                ]
+            },
+            4: {
+                images: [
+                    "assets/project/ProjectPacMan.webp",
+                    "assets/project/projectPacman_3.webp",
+                    "assets/project/projectPacMan_2.webp",
+                    "assets/project/projectPacman_5.webp",
+                    "assets/project/projectsAI_competition.webp"
+                ],
+                captions: [
+                    "AI application topic: AI Pacman.",
+                    "Presentation: Different reinforcement learning strategies used to train agents.",
+                    "Project reference: Berkeley Computer Science Course.",
+                    "Project idea implementation.",
+                    "AI competition presentation day."
+                ]
+            },
+            5: {
+                images: [
+                    "assets/project/projectsICrobot_1.webp",
+                    "assets/project/ICNviCAD_1.webp",
+                    "assets/project/projectsICrobot_2.webp",
+                    "assets/project/projectsICrobot_3.webp",
+                    "assets/project/projectsICrobot_5.webp"
+                ],
+                captions: [
+                    "System Design diagram.",
+                    "3D CAD design render of the mechanical gripper mechanism.",
+                    "Robot tank base reference.",
+                    "Reference material for training AI keypoint recognition model.",
+                    "Group members."
+                ]
+            }
+        };
+
+        // Determine current project number[cite: 1]
+        const urlParams = new URLSearchParams(window.location.search);
+        var projectNum = urlParams.get("project");
+        if (!projectNum) {
+            projectNum = localStorage.getItem("projectNumLocal") || 1;
+        } else {
+            localStorage.setItem("projectNumLocal", projectNum);
+        }
+
+        // Selected project image & caption list
+        let currentProject = projectData[projectNum] || projectData[1];
+        let currentIndex = 0;
+
+        function updateCarouselDisplay() {
+            const imgElem = document.getElementById("carouselImage");
+            const indexElem = document.getElementById("currentImageIndex");
+            const totalElem = document.getElementById("totalImagesCount");
+            const descElem = document.getElementById("imageDescription");
+
+            imgElem.src = currentProject.images[currentIndex];
+            indexElem.innerText = currentIndex + 1;
+            totalElem.innerText = currentProject.images.length;
+            descElem.innerText = currentProject.captions[currentIndex] || "No description available for this picture.";
+        }
+
+        function nextImage() {
+            currentIndex = (currentIndex + 1) % currentProject.images.length;
+            updateCarouselDisplay();
+        }
+
+        function prevImage() {
+            currentIndex = (currentIndex - 1 + currentProject.images.length) % currentProject.images.length;
+            updateCarouselDisplay();
+        }
+
+        // Initialize Carousel & Captions
+        updateCarouselDisplay();
+
+        // Mobile Tab Switcher Function[cite: 5]
+        function switchMobileTab(tab) {
+            const picSec = document.getElementById("picturesSection");
+            const descSec = document.getElementById("descriptionSection");
+            const btnPic = document.getElementById("btnPictures");
+            const btnDesc = document.getElementById("btnDescription");
+
+            if (tab === 'pictures') {
+                picSec.classList.remove('hidden');
+                descSec.classList.add('hidden');
+                btnPic.className = "flex-1 py-3 text-center text-sm font-semibold text-blue-400 border-b-2 border-blue-500 transition-colors";
+                btnDesc.className = "flex-1 py-3 text-center text-sm font-semibold text-slate-400 border-b-2 border-transparent transition-colors";
+            } else {
+                picSec.classList.add('hidden');
+                descSec.classList.remove('hidden');
+                btnDesc.className = "flex-1 py-3 text-center text-sm font-semibold text-blue-400 border-b-2 border-blue-500 transition-colors";
+                btnPic.className = "flex-1 py-3 text-center text-sm font-semibold text-slate-400 border-b-2 border-transparent transition-colors";
+            }
+        }
+
+        // Handle Responsive Layout Switching on Window Resize
+        if (window.innerWidth < 768) {
+            switchMobileTab('pictures');
+        }
+        window.addEventListener('resize', () => {
+            if (window.innerWidth >= 768) {
+                document.getElementById("picturesSection").classList.remove('hidden');
+                document.getElementById("descriptionSection").classList.remove('hidden');
+            }
+        });
+
+        // Content Injection with "Extra Resource" PDF Link Row[cite: 4]
         var content = document.getElementById("cardContent");
+
         if (projectNum == 1) {
-            image.innerHTML = `<div id="imageList" class="list">
-            <div class="item" style="--position: 1"><img src="assets/project/ProjectMicrocontroller.webp" alt=""></div>
-            <div class="item" style="--position: 2"><img src="assets/project/MicroControl_2new.webp" alt=""></div>
-            <div class="item" style="--position: 3"><img src="assets/about/aboutHardware_3.webp" alt=""></div>
-            <div class="item" style="--position: 4"><img src="assets/about/MicroControl_1.webp" alt=""></div>
-            <div class="item" style="--position: 5"><img src="assets/about/CircuitryAbout.webp" alt=""></div>
-        </div>`;
-            content.innerHTML = `<h2>01 Microcontroller project</h2>
-            <h1>Framework: C++ <br>
-                Tools: AtmelStudio & STM32CubeIDE<br> Microcontroller programming: mainly traffic light
-                simulation & some
-                UART communication </h1>
-            <p>-Arduino UNO R3 AVR Microcontroller(GPIO, timer, polling, interupt, UART)<br>
-                -STM32F103RB ARM Microcontroller(GPIO, timer, polling, interupt, UART)</p>`;
-            document.body.style.setProperty("background-image", `linear-gradient(
-             90deg,
-            rgba(44, 64, 89, 0.8) 0%,
-            rgba(255, 212, 129, 1) 50%
-            )`);
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">01 Microcontroller Project</h2>
+                <div class="space-y-4 text-slate-300 text-s leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>Learning Microcontroller programming in AVR and ARM MCU: 
+                             simulate traffic light interactions, such as timing duration for different lights (Road Traffic transition: Red --> Red yellow --> Green)
+                             and button pressed by users (to shorten the timing of red lights; transition to green light faster  ).</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <p>Successfully simulate traffic light interations with Arduino Uno and STM32 MCU.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>MCU Hardware configuration setup, e.g. baud rate, modes,internal pull-up/down resistor</li>
+                            <li>Low-level hardware GPIO logic level control</li>
+                            <li>Debugging polling vs. interrupts</li>
+                            <li>Serial data transmission with UART</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">C++ & C</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">AtmelStudio & STM32CubeIDE</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">Arduino UNO R3 AVR & STM32F103RB ARM</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
         } else if (projectNum == 2) {
-            sliderSize.innerHTML = `<div id="sliderSize" class="slider" reverse="true" style="
-            --width: 600px;
-            --height: 600px;
-            --quantity: 5;
-        ">
-        <div id="imageList" class="list">
-             <div class="item" style="--position: 1"><img src="assets/project/ProjectTraffic.webp" width="500px"
-                    height="auto" alt=""></div>
-            <div class="item" style="--position: 2"><img src="assets/project/projectsTrafficOfficer2.webp" alt=""></div>
-            <div class="item" style="--position: 3"><img src="assets/project/projectsTrafficOfficer3.webp" alt=""></div>
-            <div class="item" style="--position: 4"><img src="assets/project/projectsTrafficOfficer1.webp" alt=""></div>
-            <div class="item" style="--position: 5"><img src="assets/project/projectsTrafficOfficer5.webp" alt=""></div>
-        </div>
-    </div>`;
-            content.innerHTML = `<h2>02 Machine learning with traffic light simulation</h2>
-            <h1>Framework: variant C++(Arduino)<br>Tools: Arduino IDE & 'Blynk' & 'Teachable Machine'</h1>
-            <p>Description: training an AI model to identify parking status(simulation)</p>
-            <p>-Arduino Uno: used for producing traffic light output (red: parked full, yellow: not parked well, green:
-                available space for parking)<br>
-                -Blynk: IoT template for integrating hardware Arduino and software 'Teachable Machine' AI model<br>
-                -'Teachable Machine': free AI computer vision training model platform by Google
-            </p>`;
-            document.body.style.setProperty("background-image", `linear-gradient(
-             90deg,
-               rgba(255, 212, 129, 0.8) 25%,
-                rgba(247, 169, 96, 1) 49%
-            )`);
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">02 Machine Learning with Traffic Light Simulation</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>Project aim to develop an AI application combined with Internet-of-Things based on our learnt knowledge and creativity: 
+                            Training an AI computer vision model to identify parking situation in a traffic area using camera. 
+                            This application can be used to aid traffic officers to accurately detect cars that violates traffic rules.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <ul class="list-disc">
+                            <li>AI vision model detecting 4 different parking situations</li>
+                            <li>Integrated hardware outputs (LED lights, buzzer) with IoT templates to signal parking status (Red: full, Yellow: poor parking, Green: available, buzzer: anomaly).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Learning IoT hardware integration tools (Blynk)</li>
+                            <li>Training computer vision models and viable machine learning tools (Teachable Machine)</li>
+                            <li>Connecting AI models with physical hardware microcontrollers through wireless communication.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">Variant C++ </td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">Arduino IDE, Blynk, Teachable Machine</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">ESP32 Devkit</td></tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-white">Extra Resource</td>
+                                        <td class="p-3">
+                                            <a href="pdf/EIE3127_MLTrafficOfficier.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Project Presentation PDF (PDF)
+                                            </a>
+                                            <a href="https://youtu.be/O6cc3Ei5MY0" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Project Video (Video)
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
         } else if (projectNum == 3) {
-            sliderSize.innerHTML = `<div id="sliderSize" class="slider" reverse="true" style="
-            --width: 500px;
-            --height: 500px;
-            --quantity: 5;
-        "><div id="imageList" class="list">
-            <div class="item" style="--position: 1"><img src="assets/project/RobotCar_2.webp" alt=""></div>
-            <div class="item" style="--position: 2"><img src="assets/project/DynamicSys_2.webp" height="450" alt=""></div>
-            <div class="item" style="--position: 3"><img src="assets/project/ProjectsPID.webp" height="500" alt=""></div>
-            <div class="item" style="--position: 4"><img src="assets/project/projectRobotCar_3.webp" alt=""></div>
-            <div class="item" style="--position: 5"><img src="assets/project/DynamicSys_1.webp" alt=""></div>
-        </div>
-
-    </div>`;
-            content.innerHTML = `<h2>03 Robot Car and PID</h2>
-            <h1>Framework: C++<br> Tools: STM32CubeIDE & Matlab(PID)</h1>
-            <p>Description: Robot car hardware programming and PID practical application</p>
-            <p>-Robot Car: Remote communication with robot car using UART,<br>Line tracing using IR sensor, Ultrasonic
-                sensor parking<br>
-                -PID: applying learned PID techniques to program robot car(objective: robot car run in straight line
-                with friction varying mat)
-            </p>`;
-            document.body.style.setProperty("background-image", `linear-gradient(
-             90deg,
-               rgba(247, 169, 96, 0.8) 49%,
-                rgba(239, 123, 62, 1) 76%
-            )`);
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">03 Robot Car and PID</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>This project combines topics of hardware programming in AVR with dynamic system analysis (Joint Task), 
+                            aims to implement a robot car that can run in a straight line on a friction varying mat. 
+                            The process require collection of robot car motor data, deriving Proportional-Integral-Derivative (PID) equation,
+                            programming AVR Microcontroller to control robot car, and integrate PID control to fulfill the project requirement.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <ul class="list-disc">
+                            <li>Enabled remote UART communication, line tracking, and ultrasonic parking with robot car (Task 1, 2, 3)</li> 
+                            <li>Apply PID control on Robot car to run straight-line motion under friction varying mat (Joint Task)</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Control systems engineering using mathematical simulation tools (Matlab)</li>
+                            <li>Sensor data acquisition techniques.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">C++</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">STM32CubeIDE & MATLAB (PID)</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">STM32F103RB ARM</td></tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-white">Extra Resource</td>
+                                        <td class="p-3">
+                                            <a href="pdf/JointLab_finalreport.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Download Project Report (PDF)
+                                            </a>
+                                            <a href="https://youtube.com/shorts/jUE4RXrK7C4" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Joint Task Video (Video)
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
         } else if (projectNum == 4) {
-            sliderSize.innerHTML = `<div id="sliderSize" class="slider" reverse="true" style="
-            --width: 500px;
-            --height: 500px;
-            --quantity: 5;
-        "><div id="imageList" class="list">
-            <div class="item" style="--position: 1"><img src="assets/project/ProjectPacMan.webp"  alt=""></div>
-            <div class="item" style="--position: 2"><img src="assets/project/projectPacman_3.webp" height="300" alt=""></div>
-            <div class="item" style="--position: 3"><img src="assets/project/projectPacMan_2.webp" height="300"alt=""></div>
-            <div class="item" style="--position: 4"><img src="assets/project/projectPacman_5.webp" height="300"alt=""></div>
-            <div class="item" style="--position: 5"><img src="assets/project/projectsAI_competition.webp" alt=""></div>
-        </div>
-
-    </div>`;
-            content.innerHTML = `<h2>04 AI contest</h2>
-            <h1>Framework: Python<br> Tools: VScode</h1>
-            <p>Description: training an AI-driven Pacman to play a game 
-                (self-learning contest to present somethingrelated to AI)
-            </p>
-            <p>
-                -Python: learning reinforcment concepts/related projects online<br>
-                Main reference for codes:Berkley, University of California, CS188 Subject: <br>
-                <a href="https://inst.eecs.berkeley.edu/~cs188/fa24/projects/" target="_blank">https://inst.eecs.berkeley.edu/~cs188/fa24/projects/ </a>
-            </p>`;
-            document.body.style.setProperty("background-image", `linear-gradient(
-             90deg,
-               rgba(239, 123, 62, 0.8) 76%,
-                rgba(234, 83, 85, 1) 100%
-            )`);
-            document.documentElement.style.setProperty("--primary-color", "#457dc2");
-
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">04 Innovative AI Application Contest (Pacman AI)</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>Develop an AI related project or application that is interesting: 
+                            Self-learning AI contest project focused on training an AI-driven agent to master game playing strategies.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <p>Implemented reinforcement learning decision algorithms inspired by academic AI coursework frameworks.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Reinforcement learning paradigms, decision tree logic, and policy/value iteration concepts.</li>
+                            <li>Training AI agents with Python libraries</li>
+                        <ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">Python</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">VS Code</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Reference</td><td class="p-3"><a href="https://inst.eecs.berkeley.edu/~cs188/fa24/projects/" target="_blank" class="text-blue-400 underline hover:text-blue-300">UC Berkeley CS188</a></td></tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-white">Extra Resource</td>
+                                        <td class="p-3">
+                                            <a href="pdf/PacMan_RL_InnoAI_Contest.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Download Presentation(PDF)
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
         } else if (projectNum == 5) {
-            sliderSize.innerHTML = `<div id="sliderSize" class="slider" reverse="true" style="
-            --width: 500px;
-            --height: 500px;
-            --quantity: 5;
-        "><div id="imageList" class="list">
-            <div class="item" style="--position: 1"><img src="assets/project/projectsICrobot_1.webp" alt=""></div>
-            <div class="item" style="--position: 2"><img src="assets/project/ICNviCAD_1.webp" alt=""></div>
-            <div class="item" style="--position: 3"><img src="assets/project/projectsICrobot_2.webp" alt=""></div>
-            <div class="item" style="--position: 4"><img src="assets/project/projectsICrobot_3.webp" alt=""></div>
-            <div class="item" style="--position: 5"><img src="assets/project/projectsICrobot_5.webp" alt=""></div>
-        </div>
-
-    </div>`;
-            content.innerHTML = `<h2>05 Robot Contest with AI vision</h2>
-            <h1>Framework: Python <br> Tools: VScode, 3DCAD, RoboFlow, Ultralytics(Keypoint library)</h1>
-            <p>Description: AI robot contest to complete certain task<br>
-                (e.g.getting correct cube, prevent opponents getting a line in tic tac toe)<br>
-                Detailed contest information:<a href="https://app7.rthk.hk/special/aburobocon2026/#outline" target="_blank"> https://app7.rthk.hk/special/aburobocon2026/#outline</a></p>
-            <p>-Completed Robot Modules: 1. DC motor (Tank wheels with tracks) 2. AI box recognition keypoint model<br>
-                -cross department project(Mechanical Students  + Electrical Engineering Students)
-            </p>`;
-            document.body.style.setProperty("background-image", `linear-gradient(
-             90deg,
-               rgba(239, 123, 62, 0.8) 76%, rgba(234, 83, 85, 1) 100%
-            )`);
-            document.documentElement.style.setProperty("--primary-color", "#457dc2");
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">05 Robot Contest with AI Vision</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>Robocon 2026: Cross-department collaboration project (Mechanical + Electrical and Electronic engineering students) 
+                            to complete complex arena tasks like object recognition and competitive blocks sorting. 
+                            Arena tasks for robot includes assembling weapons, identifying correct team cubes, robot movement accross
+                            varying height levels, placing cubes on tic tac toe. </p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <ul class="list-disc">
+                            <li>Built functional robot modules including tracked tank DC-motor bases</li>
+                            <li>Train an AI keypoint box-recognition vision model to detect correct cubes, 
+                                and aligh itself to successfully grab the cubes from different angles </li>
+                            <li>Implement robots's basic movement controls</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Computer vision model training pipelines (RoboFlow)</li>
+                            <li>Image Dataset labeling with keypoints setups </li>
+                            <li>Team communication between different disciplinary students</li>
+                            <li>Hardware programming using Python on Jetson Nano</li>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">Python</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">VS Code, 3D CAD, RoboFlow, Ultralytics(library for keypoint model)</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">Jetson Nano, Arduino Uno</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Contest Info</td><td class="p-3"><a href="https://app7.rthk.hk/special/aburobocon2026/#outline" target="_blank" class="text-blue-400 underline hover:text-blue-300">ABU Robocon 2026</a></td></tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-white">Extra Resource</td>
+                                        <td class="p-3">
+                                            <a href="pdf/IC382_A04_SystemDesign.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Download 1st Semester Project Presentation(Collaborative Report) (PDF)
+                                            </a>
+                                            <a href="pdf/IC_HardwareIntegrate.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Download 2nd Semester Project Presentation(Electical and Electronic Students only) (PDF)
+                                            </a>
+                                            <a href="https://youtu.be/dhA0LoWkEEo" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                IC382 Presentation Video (Video)
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
         }
     </script>
 </body>
+
+</html>
 
 
 </html>
