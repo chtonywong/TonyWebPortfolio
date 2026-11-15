@@ -228,6 +228,54 @@
                     "Reference material for training AI keypoint recognition model.",
                     "Group members."
                 ]
+            },
+            6: {
+                images: [
+                    "assets/project/ServiceLearn/SL_EventPoster.webp",
+                    "assets/project/ServiceLearn/SL_PastPhoto.webp",
+                    "assets/project/ServiceLearn/SL_CreateTime.webp",
+                    "assets/project/ServiceLearn/SL_PresentEngineering.webp",
+                    "assets/about/aboutSL_2new.webp"
+                ],
+                captions: [
+                    "Service Learning Poster: teaching Secondary Students STEM concepts and stress importance in taking car of elderlies, especially dimentia.",
+                    "Past event photos.",
+                    "Some ideas about robot design for students",
+                    "Presentation about STEM definition.",
+                    "Photo with students and robots."
+                ]
+            },
+            7: {
+                images: [
+                    "assets/project/BLEMesh/BLE_MeshDefine.webp",
+                    "assets/project/BLEMesh/BLE_MeshFlow.webp",
+                    "assets/project/BLEMesh/BLE_documentation.webp",
+                    "assets/project/BLEMesh/BLE_HardwareSetup.webp",
+                    "assets/project/BLEMesh/BLE_TutorialGuides.webp"
+                ],
+                captions: [
+                    "Definition of BLE Mesh and its characteristics.",
+                    "BLE mesh provision steps and process.",
+                    "BLE mesh research documentation",
+                    "Hardware setup diagram for demo examples.",
+                    "Tutorial guides in teaching students how to provision BLE mesh OnOff server exaxmple."
+                ]
+            },
+            8: {
+                images: [
+                    "assets/project/Capstone/Capstone_Objective.webp",
+                    "assets/project/Capstone/Capstone_LogbookSnip.webp",
+                    "assets/project/Capstone/Capstone_modelConstruct.webp",
+                    "assets/project/Capstone/Capstone_TrainModel.webp",
+                    "assets/project/Capstone/Capstone_VideoDemo.webp"
+                ],
+                captions: [
+                    "Capstone project objectives.",
+                    "Research logbook.",
+                    "Constructing Antenna Model using CST Studio Suite to get simulation data",
+                    "Neural Network Training models used to predict accurate antenna performance outputs.",
+                    "Video Demo Snipplet."
+                ]
             }
         };
 
@@ -579,7 +627,184 @@
                         </div>
                     </div>
                 </div>`;
-        }
+        } else if (projectNum == 6) {
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">Service Learning in STEM</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>This community service experience last for 1 semester, requiring us to eduacate
+                            Secondary Students about STEM concepts and participate in a robot building contest.
+                            The contest revolves around 2 aspects: teaching students to design and program a 
+                            MicroBit robot; allowing students to collaborate with elderlies in order to finish 
+                            the robot car race (as it involves student race and elderly race track sessions). 
+                            A group of 4 will teach 8-10 students related to building the robot, programming, 
+                            communication skills with elderlies within 4 days. Each day is assigned with a specific 
+                            topic and prepared by 1 individual member. (I am responsible for day 2 programming material) </p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Experience</h3>
+                        <ul class="list-disc">
+                            <li>Interesting teaching experience in organizing teaching materials</li>
+                            <li>Finding ways to communicate with students in a different age group (some generation gap exists)</li>
+                            <li>Applying some learnt electronic knowledge when teaching about STEM knowledge</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Organization and preparation skills of teaching material</li>
+                            <li>Social skills in communication with students and elderlies</li>
+                            <li>Preparation in backup plans if unexpected event occurs (e.g., 
+                                damaged tools, students unwilling to participate) </li>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">Microbit Programming</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">Microbit APP on iPad</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">Microbit robot</td></tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-white">Extra Resource</td>
+                                        <td class="p-3">
+                                            <a href="pdf/SL_presentDay2.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Day 2 presentation powerpoint(PDF)
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
+        } else if (projectNum == 7) {
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">Work Experience: BLE Mesh Researcher</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>This is a part-time job in the Hong Kong Polytechnic University Industrial Centre.
+                            I was assigned as Bluetooth Low Energy (BLE) Mesh Network Researcher to conduct research
+                            on BLE Mesh concepts and organize them into training materials for students interested
+                            in learning BLE Mesh.</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <ul class="list-disc">
+                            <li>Powerpoint slides, word documents, and tutorial videos about BLE Mesh</li>
+                            <li>Learning relatively unfamiliar applications (BLE Mesh as an communication protocol) 
+                                and take on research with staff</li>
+                            <li>Setting up example tutorials in teaching students about BLE Mesh</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Conduct research on a job-like basis</li>
+                            <li>Create compatible and easy-to-understand contents when preparing materials
+                                (As my staff insisted, some students wanting to learn such skills might not be electical
+                                or electronic engineers) </li>
+                            <li>Collaboration and communication skills between my staff and employer 
+                                , ensuring aligned and coherent objectives</li>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">Espressif Systems, C </td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">VS Code, nRF Connect APP</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">ESP32-C3, breadboard</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
+        } else if (projectNum == 8) {
+            content.innerHTML = `
+                <h2 class="text-2xl font-bold text-blue-400 border-b border-slate-700/80 pb-3">Capstone Project: AI-Assisted Antenna</h2>
+                <div class="space-y-4 text-slate-300 text-m leading-relaxed">
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">1. Background</h3>
+                        <p>A Capstone Project is required in order to graduate. I was assigned with Professor Lin Wei
+                            research topic on "AI-Assisted Antenna Design". As designing an Antenna involves a lot of 
+                            time-consuming process and professional RF engineers' knowledge, an application regarding
+                            the feasibility of applying AI to find geometric parameters of antenna was introduced. 
+                            This project was done in the following manner: research on basic knowledge in Antenna-> 
+                            revise applicable knowledge of learnt AI models -> Assign target Antenna for 
+                            design (Huygens Antenna) -> Use and learn simulation software to generate data (CST Studio Suite)
+                            -> Export data to AI model for training -> Explore variations of different AI model (Ensemble learning,
+                            Neural Network) -> Evaluate AI model prediction accuracy and improve -> 
+                            Extension (personal exploration): Hardware Demo of prediction model with ESP32 and directional antenna</p>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">2. Achieved</h3>
+                        <ul class="list-disc">
+                            <li>Research on Antenna knowledge, Antenna Evaluation Metric, Simulation tools, AI models</li>
+                            <li>Train 4 different AI models to find best performing model in predicting design parameters</li>
+                            <li>Academic Report in summarizing project progress and findings lasting for a year</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-1 text-base">3. Leant Skills</h3>
+                        <ul class="list-disc">
+                            <li>Knowledge in hardware designs of Antenna</li>
+                            <li>Simulation tools and skills in RF design applications</li>
+                            <li>Communication with professors in reporting project progress and asking correct 
+                                questions when encountering unknown knowledge</li>
+                            <li>Independence in conducting research (Professors did not give expected outcomes throughout
+                                project proposal, discussion or final presentation)</li>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-white mb-2 text-base">4. Framework & Tools</h3>
+                        <div class="overflow-x-auto border border-slate-700/80 rounded-xl">
+                            <table class="w-full text-left text-s">
+                                <thead class="bg-slate-800 text-slate-400 uppercase border-b border-slate-700/80">
+                                    <tr><th class="p-3">Category</th><th class="p-3">Details</th></tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-700/80">
+                                    <tr><td class="p-3 font-medium text-white">Framework</td><td class="p-3">Python</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Tools</td><td class="p-3">CST Studio Suite(RF Antenna Construct), VS Code, Arduino IDE</td></tr>
+                                    <tr><td class="p-3 font-medium text-white">Hardware</td><td class="p-3">ESP32-S2-Wrover-Devkit-LIPO-EA</td></tr>
+                                    <tr>
+                                        <td class="p-3 font-medium text-white">Extra Resource</td>
+                                        <td class="p-3">
+                                            <a href="pdf/AIAssisted_FYP_FinalPresent.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Final FYP presentation slides(PDF)
+                                            </a>
+                                            <a href="pdf/Capstone202526_Poster.pdf" download target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Demo day Poster (PDF)
+                                            </a>
+                                            <a href="https://youtu.be/UrfU4Y3u4mQ" target="_blank" class="inline-flex items-center gap-1.5 px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-md font-medium text-xs transition-colors shadow">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                3 min Demo in Final Presentation (Video)
+                                            </a>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>`;
     </script>
 </body>
 
